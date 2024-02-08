@@ -14,7 +14,7 @@ edited_df = st.data_editor(df) #編集可能形式での表の表示。ただし
 # This is behind a button to avoid exceeding Google API Quota
 if st.button("Update worksheet"):
     df = conn.update(
-        worksheet="Example 1",
+        worksheet="sheet1",
         data=df,
     )
     st.cache_data.clear()
