@@ -10,5 +10,12 @@ df = conn.read()
 edited_df = st.data_editor(df) #編集可能形式での表の表示。ただしそのまま保存はできない(当たり前)
 #st.write(df)
 
-if st.button('Save as data.csv'):
-    conn.write(df)
+# click button to update worksheet
+# This is behind a button to avoid exceeding Google API Quota
+if st.button("Update worksheet"):
+    df = conn.update(
+        worksheet="Example 1",
+        data=df,
+    )
+    st.cache_data.clear()
+    st.experimental_rerun()
