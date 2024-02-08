@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 from streamlit_gsheets import GSheetsConnection
 
+#一方通行だけどstreamlit側の変更をスプレッドシート側に反映できる
+#SpreadSheets側の変更をstreamlit側に反映したい場合は、キャッシュを削除してリロードする必要がある
 
 #あとはconnectionオブジェクトを作成してread()メソッド使うだけでpandsのdfになる
 conn = st.connection("gsheets", type=GSheetsConnection)
