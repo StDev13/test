@@ -15,7 +15,7 @@ edited_df = st.data_editor(df) #編集可能形式での表の表示。ただし
 if st.button("Update worksheet"):
     df = conn.update(
         worksheet="sheet1",
-        data=df,
+        data=edited_df,
     )
     st.cache_data.clear()
     st.experimental_rerun()
