@@ -52,19 +52,23 @@ def handle_button_press(button_value):
         st.experimental_rerun()
     elif button_value == "d":
         check_prompt()
-        st.session_state.done_status = "d"
         st.experimental_rerun()
 
 # 入力された暗証番号とdata.csvのnum列を比較して、一致する場合はpromptを表示
 def check_prompt():
-    if st.session_state.input_sequence:
+    if st.session_state.input_sequence == "":
+        st.session_state.input_sequence_len = 4                    
+        st.session_state.done_status = ""
+    elif st.session_state.input_sequence:
         st.session_state.input_sequence_len = len(str(st.session_state.input_sequence))
+        st.session_state.done_status = "d"        
         input_num = int(st.session_state.input_sequence)
         matching_row = df[df['num'] == input_num]
         if not matching_row.empty:
             st.session_state.result_prompt = matching_row.iloc[0]['prompt']
         else:
             st.session_state.result_prompt = "一致する行が見つかりませんでした。"
+
 
 # レイアウトの設定
 col1, col2, col3, col4, col5 = st.columns(5)
@@ -94,5 +98,3 @@ if col3.button("0", use_container_width=True):
     handle_button_press(0)
 if col4.button("実行", use_container_width=True):
     handle_button_press("d")
-
-#st.write(df)
