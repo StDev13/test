@@ -14,7 +14,11 @@ for key, value in default_session_state_values.items():
         st.session_state[key] = value
 
 # ローカルcsv読み込み。
-df = pd.read_csv('data.csv', encoding="shift-jis")
+@st.cache_data
+def read_csv():
+    df = pd.read_csv('data.csv', encoding="shift-jis")
+    return df
+df = read_csv()
 
 # タイトルを追加
 #st.title("暗証番号チェックアプリ")
